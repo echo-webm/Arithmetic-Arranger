@@ -52,10 +52,12 @@ def dashed_line(widths, i):
     return ''.join(line) + '    '
 
 def final_results(results, widths, i):
-    if results[i] < 0:
-        return ' ' + padding(widths, results, i) + str(results[i]) + '    '
+    if int(results[i]) < 0 or len(results[i]) > widths[i]:
+        print(' ' + padding(widths, results, i) + results[i] + '    ')
+        return ' ' + padding(widths, results, i) + results[i] + '    '
     else: 
-        return '  ' + padding(widths, results, i) + str(results[i]) + '    '
+        print('  ' + padding(widths, results, i) + results[i] + '    ')
+        return '  ' + padding(widths, results, i) + results[i] + '    '
 
 def arithmetic_arranger(problems, showResults=False):
     len_problems = len(problems)
@@ -87,9 +89,9 @@ def arithmetic_arranger(problems, showResults=False):
     #computes results
     for i in range(len_problems):
         if operation_list[i] == '+':
-            results.append(int(operand_top_list[i]) + int(operand_bottom_list[i]))
+            results.append(str(int(operand_top_list[i]) + int(operand_bottom_list[i])))
         else:
-             results.append(int(operand_top_list[i]) - int(operand_bottom_list[i]))    
+             results.append(str(int(operand_top_list[i]) - int(operand_bottom_list[i])))    
 
     #returns maximum widths
     for i in range(len_problems):
@@ -119,6 +121,6 @@ def arithmetic_arranger(problems, showResults=False):
         results_string = ''.join(results_list)
         results_string.strip(' ')
 
-        return top_string.strip(' ').strip('_') + '\n' + bottom_string.strip(' ').strip('_') + '\n' + dash_string.strip(' ') + '\n' + results_string.strip('_').strip(' ')
+        return top_string.strip(' ').strip('_') + '\n' + bottom_string.strip(' ').strip('_') + '\n' + dash_string.strip(' ') + '\n' + results_string.strip(' ').strip('_')
 
     return top_string.strip(' ').strip('_') + '\n' + bottom_string.strip(' ').strip('_') + '\n' + dash_string.strip(' ')
